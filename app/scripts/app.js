@@ -59,6 +59,13 @@ Instructions:
     Your code goes here! Uncomment the next line when you're ready to start!
      */
 
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json')
+    .then((response) => {
+      return Promise.all(response.results.map(getJSON));
+    })
+    .then((arrayOfPlanetData) => (
+      arrayOfPlanetData.forEach(planetData => createPlanetThumb(planetData))
+    ))
+    .catch(error => console.log(error));
   });
 })(document);
